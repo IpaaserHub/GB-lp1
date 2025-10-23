@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrowthBridge - 起業からIPOまでの伴走型経営支援</title>
+    
+    <!-- Google Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+    
+    <!-- External CSS -->
+    <link href="https://unpkg.com/ress@4.0.0/dist/ress.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --main-theme-color: #1a202c;
+            --main-theme-color-dark: #111827;
+            --accent-gold: #c59d5f;
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --background-light: #f7fafc;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            word-break: keep-all;
+            overflow-wrap: break-word;
+            background-color: var(--white);
+        }
+
+        .japanese-text {
+            word-break: keep-all;
+            overflow-wrap: break-word;
+            line-height: 1.5;
+            letter-spacing: 0.05em;
+        }
+
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .header-logo h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--main-theme-color);
+        }
+        
+        .header-logo h1 a {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .header-nav ul li {
+            list-style: none;
+        }
+
+        .header-nav a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .header-nav a:hover {
+            background-color: var(--background-light);
+            color: var(--main-theme-color);
+        }
+
+        .order-button {
+            background-color: var(--main-theme-color) !important;
+            color: var(--white) !important;
+            padding: 12px 25px !important;
+            border-radius: 30px !important;
+            font-weight: 700 !important;
+        }
+
+        .order-button:hover {
+            background-color: var(--main-theme-color-dark) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 32, 44, 0.3);
+        }
+
+        /* Mobile Menu */
+        .btn {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            width: 30px;
+            height: 25px;
+            justify-content: space-between;
+        }
+
+        .btn span {
+            width: 100%;
+            height: 3px;
+            background-color: var(--main-theme-color);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        #g-nav {
+            display: flex;
+        }
+
+        #g-nav-list ul {
+            display: flex;
+        }
+
+        /* Hero Section */
+        .key-visual {
+            min-height: 100vh;
+            background-color: var(--main-theme-color);
+            background-image: linear-gradient(rgba(26, 32, 44, 0.85), rgba(17, 24, 39, 0.95)), url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&q=80&fit=crop');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        /* Hero Background Animation */
+        .key-visual::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        .hero-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.1;
+        }
+
+        .hero-shape {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero-shape:nth-child(1) {
+            width: 30px;
+            height: 30px;
+            background: var(--accent-gold);
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .hero-shape:nth-child(2) {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.3);
+            top: 60%;
+            right: 20%;
+            animation-delay: 5s;
+        }
+
+        .hero-shape:nth-child(3) {
+            width: 25px;
+            height: 25px;
+            background: var(--accent-gold);
+            bottom: 30%;
+            left: 30%;
+            animation-delay: 10s;
+            border-radius: 20%;
+        }
+
+        .hero-shape:nth-child(4) {
+            width: 35px;
+            height: 35px;
+            background: rgba(255,255,255,0.2);
+            top: 40%;
+            right: 40%;
+            animation-delay: 15s;
+            border-radius: 0;
+            transform: rotate(45deg);
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.3;
+            }
+            25% {
+                transform: translateY(-20px) rotate(90deg);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-40px) rotate(180deg);
+                opacity: 0.3;
+            }
+            75% {
+                transform: translateY(-20px) rotate(270deg);
+                opacity: 0.6;
+            }
+        }
+
+        .key-visual-wrapper-pc {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .key-visual-titleBox {
+            color: var(--white);
+            text-align: left;
+            margin-bottom: 60px;
+        }
+
+        .key-sub-txt {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .key-title {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 40px;
+            letter-spacing: 0.02em;
+        }
+
+        .key-title-inner span {
+            color: var(--accent-gold) !important;
+        }
+
+        .key-visual-orderBox {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .key-visual-orderBox-title {
+            color: var(--white);
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .key-visual-linkBox {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .key-visual-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .key-visual-link.web-link {
+            background-color: var(--accent-gold);
+            color: var(--main-theme-color-dark);
+        }
+
+        .key-visual-link.web-link:hover {
+            background-color: #d4af37;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(197, 157, 95, 0.4);
+        }
+
+        .key-visual-link.tel-link {
+            background: transparent;
+            border: 2px solid var(--white);
+            color: var(--white);
+        }
+
+        .key-visual-link.tel-link:hover {
+            background: var(--white);
+            color: var(--main-theme-color);
+        }
+
+        /* Section Styles */
+        .section-box {
+            padding: 160px 0;
+            position: relative;
+        }
+
+        .h2-title {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 80px;
+            color: var(--main-theme-color);
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            position: relative;
+        }
+
+        .border-line::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background-color: var(--accent-gold);
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Problem Section */
+        .problem-bg {
+            background: var(--background-light);
+        }
+
+        .problem-box ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .problem-box li {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 500;
+        }
+
+        .problem-icon {
+            color: #ef4444;
+            flex-shrink: 0;
+        }
+
+        /* About Section */
+        .about-bg {
+            background: var(--white);
+        }
+
+        .about-h2-title {
+            font-size: 4rem;
+            line-height: 1.3;
+        }
+
+        .pink-slide {
+            background: linear-gradient(transparent 60%, var(--accent-gold) 60%);
+            padding: 5px 0;
+        }
+
+        .about-h2-pink {
+            color: var(--main-theme-color) !important;
+            font-size: 5rem !important;
+        }
+
+        .about-article-items {
+            display: grid;
+            gap: 80px;
+            margin-top: 100px;
+        }
+
+        .about-article-box {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            background: var(--background-light);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .about-article-box:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .about-article-box img {
+            width: 400px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .about-article-txt h3 {
+            font-size: 2.2rem;
+            color: var(--main-theme-color);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .about-article-txt p {
+            font-size: 1.4rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        /* Contact Box */
+        .contact-box {
+            background: var(--main-theme-color);
+            color: var(--white);
+            text-align: center;
+            padding: 100px 0;
+            margin: 80px 0;
+            border-radius: 30px;
+        }
+
+        .contact-box-catchphrase {
+            font-size: 1.6rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .contact-box-title {
+            font-size: 3.5rem;
+            margin: 30px 0 50px;
+            font-weight: 800;
+        }
+
+        .contact-box-flex {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .gradient-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 20px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .gradient-link.web-link {
+            background: var(--accent-gold);
+            color: var(--main-theme-color-dark);
+        }
+
+        .gradient-link.tel-link {
+            background: transparent;
+            border: 2px solid var(--white);
+            color: var(--white);
+        }
+
+        .gradient-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Services Grid */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .service-box {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .service-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .service-box img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .service-box p {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--main-theme-color);
+        }
+
+        .service-catchphrase {
+            text-align: center;
+            font-size: 1.6rem;
+            color: var(--main-theme-color);
+            font-weight: 600;
+        }
+
+        /* Reasons Section */
+        .reason-bg {
+            background: var(--background-light);
+        }
+
+        .reason-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 60px;
+        }
+
+        .reason-article-box {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reason-article-box .number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: var(--main-theme-color);
+            opacity: 0.08;
+            font-size: 6rem;
+            font-weight: 900;
+            line-height: 1;
+            z-index: 0;
+            user-select: none;
+        }
+
+        .reason-article-box img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .reason-sentence {
+            position: relative;
+            z-index: 1;
+        }
+
+        .reason-sentence h3 {
+            font-size: 1.8rem;
+            color: var(--main-theme-color);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .reason-sentence p {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .reason-sentence p span {
+            color: var(--main-theme-color);
+            font-weight: 600;
+        }
+
+        /* Usage Steps */
+        .use-grid {
+            display: grid;
+            gap: 60px;
+        }
+
+        .use-article {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .use-article:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .step-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .step-number span {
+            color: var(--main-theme-color);
+            font-size: 2rem;
+        }
+
+        .use-title {
+            font-size: 2rem;
+            color: var(--main-theme-color);
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .use-image-box img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .use-article p {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        /* Form Section */
+        .tab-switch {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tab-switch label {
+            display: inline-block;
+            padding: 15px 30px;
+            margin-right: 20px;
+            background: var(--background-light);
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .tab-switch input.form-tab:checked + label {
+            background-color: var(--main-theme-color);
+            color: var(--white);
+        }
+
+        .form-tab {
+            display: none;
+        }
+
+        .order-form-box {
+            display: none;
+            background: var(--white);
+            padding: 60px;
+            border-radius: 0 20px 20px 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-tab:checked + label + .order-form-box {
+            display: block;
+        }
+
+        .label-title {
+            display: block;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--main-theme-color);
+        }
+
+        .required-span {
+            background-color: var(--main-theme-color);
+            color: var(--white);
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        .any-span {
+            background-color: var(--text-secondary);
+            color: var(--white);
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            transition: border-color 0.3s ease;
+            background-color: #fdfdff;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--main-theme-color);
+            box-shadow: 0 0 0 3px rgba(26, 32, 44, 0.1);
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .submit-button button {
+            background-color: var(--main-theme-color);
+            color: var(--white);
+            padding: 20px 60px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-button button:hover {
+            background-color: var(--main-theme-color-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(26, 32, 44, 0.3);
+        }
+
+        .attention {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+
+        /* Footer */
+        .footer-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px 0;
+            background: var(--background-light);
+        }
+
+        .footer-info {
+            font-size: 1.2rem;
+        }
+
+        .footer-info th {
+            padding: 10px 20px 10px 0;
+            text-align: left;
+            font-weight: 600;
+            color: var(--main-theme-color);
+        }
+
+        .footer-info td {
+            padding: 10px 0;
+        }
+
+        .footer-tel-link {
+            color: var(--main-theme-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-tel-link:hover {
+            color: var(--main-theme-color-dark);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 30px 0;
+            background: var(--main-theme-color);
+            color: var(--white);
+            font-size: 1.1rem;
+        }
+
+        /* Sticky CTA */
+        .sticky-cta {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .sticky-cta.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sticky-cta .cta-button {
+            background: var(--accent-gold);
+            color: var(--main-theme-color-dark);
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 25px rgba(197, 157, 95, 0.4);
+            animation: gentle-pulse 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes gentle-pulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 5px 25px rgba(197, 157, 95, 0.4);
+            }
+            50% { 
+                transform: scale(1.02);
+                box-shadow: 0 8px 35px rgba(197, 157, 95, 0.6);
+            }
+        }
+
+        .sticky-cta .cta-button:hover {
+            transform: scale(1.05) !important;
+            box-shadow: 0 10px 40px rgba(197, 157, 95, 0.8) !important;
+        }
+
+        .sticky-cta .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            border-radius: inherit;
+            opacity: 0;
+            animation: subtle-shine 4s ease-in-out infinite;
+        }
+
+        @keyframes subtle-shine {
+            0%, 90%, 100% { opacity: 0; transform: translateX(-100%); }
+            10%, 80% { opacity: 1; transform: translateX(100%); }
+        }
+
+        /* Animations */
+        .fadeUp {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fadeUp.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fadeIn {
+            opacity: 0;
+            transition: all 1s ease;
+        }
+
+        .fadeIn.animate {
+            opacity: 1;
+        }
+
+        .opacityIn {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .opacityIn.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .btn {
+                display: flex;
+            }
+
+            #g-nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background: var(--white);
+                transition: all 0.3s ease;
+                padding-top: 100px;
+            }
+
+            #g-nav.open {
+                right: 0;
+            }
+
+            #g-nav-list ul {
+                flex-direction: column;
+                gap: 0;
+                padding: 0 30px;
+            }
+
+            #g-nav-list ul li {
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+            #g-nav-list ul li a {
+                display: block;
+                padding: 20px 0;
+                font-size: 1.2rem;
+            }
+
+            .header-logo h1 {
+                font-size: 2rem;
+            }
+
+            .key-title {
+                font-size: 2.5rem;
+            }
+
+            .key-sub-txt {
+                font-size: 1.2rem;
+            }
+
+            .key-visual-linkBox {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .h2-title {
+                font-size: 2.5rem;
+            }
+
+            .about-h2-title {
+                font-size: 2.8rem;
+            }
+
+            .about-h2-pink {
+                font-size: 3.5rem !important;
+            }
+
+            .about-article-box {
+                flex-direction: column !important;
+                gap: 30px;
+                padding: 30px;
+            }
+
+            .about-article-box img {
+                width: 100%;
+                max-width: 300px;
+                height: 200px;
+            }
+
+            .about-article-txt h3 {
+                font-size: 1.8rem;
+            }
+
+            .about-article-txt p {
+                font-size: 1.2rem;
+            }
+
+            .contact-box-flex {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .reason-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .reason-article-box {
+                padding: 30px;
+            }
+
+            .use-article {
+                flex-direction: column !important;
+                gap: 30px;
+                padding: 30px;
+            }
+
+            .use-image-box img {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .order-form-box {
+                padding: 30px;
+            }
+
+            .footer-flex {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .sticky-cta {
+                bottom: 10px;
+                right: 10px;
+            }
+
+            .sticky-cta .cta-button {
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+
+            .problem-box ul {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .problem-box li {
+                font-size: 1.2rem;
+                padding: 20px;
+            }
+
+            .section-box {
+                padding: 80px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .wrapper {
+                padding: 0 15px;
+            }
+
+            .key-title {
+                font-size: 2rem;
+            }
+
+            .h2-title {
+                font-size: 2rem;
+            }
+
+            .about-h2-title {
+                font-size: 2.2rem;
+            }
+
+            .about-h2-pink {
+                font-size: 2.8rem !important;
+            }
+
+            .contact-box-title {
+                font-size: 2.5rem;
+            }
+
+            .section-box {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Start -->
+    <header class="header-flex wrapper">
+        <div class="header-logo">
+            <h1><a href="#" style="text-decoration: none; color: inherit;"><svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 10px; color: var(--accent-gold);"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5-10-5-10 5z"></path></svg>GrowthBridge</a></h1>
+        </div>
+        
+        <button class="btn" id="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <nav id="g-nav">
+            <div id="g-nav-list">
+                <ul>
+                    <li><a href="#about">サービス概要</a></li>
+                    <li><a href="#service">提供サービス</a></li>
+                    <li><a href="#reason">選ばれる理由</a></li>
+                    <li><a href="#use">ご利用の流れ</a></li>
+                    <li><a href="#voice">お客様の声</a></li>
+                    <li><a href="#order-form">お問い合わせ</a></li>
+                    <li><a href="https://example.com" target="_blank" rel="noopener noreferrer" class="order-button">無料相談はこちら</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Header End -->
+
+    <main>
+        <!-- Hero Section Start -->
+        <section id="key-visual" class="key-visual order-box-view">
+            <div class="hero-animation">
+                <div class="hero-shape"></div>
+                <div class="hero-shape"></div>
+                <div class="hero-shape"></div>
+                <div class="hero-shape"></div>
+            </div>
+            
+            <div class="key-visual-wrapper-pc wrapper">
+                <div class="key-visual-titleBox">
+                    <div class="key-sub-txt japanese-text">
+                        起業家・スタートアップ経営者のあなたへ
+                    </div>
+                    <h2 class="key-title japanese-text">
+                        <div class="key-title-inner key-title-inner-scroll">
+                            社長の仕事は、<br>未来を描くこと。
+                        </div>
+                        <div class="key-title-inner">
+                            IPOまでの地図は、<br><span>僕らが描きます。</span>
+                        </div>
+                    </h2>
+                </div>
+                
+                <div class="key-visual-orderBox">
+                    <div class="key-visual-orderBox-title japanese-text">
+                        ＼CFO・CAO機能を外部で完結／
+                    </div>
+                    <div class="key-visual-linkBox">
+                        <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="key-visual-link web-link">
+                            無料相談で最適な<br>伴走プランを知る
+                        </a>
+                        <a href="tel:03-1234-5678" class="key-visual-link tel-link">
+                            <span class="tel-icon"></span>
+                            03-1234-5678
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Hero Section End -->
+
+        <!-- Problem Section Start -->
+        <article id="problem" class="problem-bg section-box">
+            <div class="wrapper problem-box">
+                <h2 class="h2-title problem-h2 border-line fadeUp japanese-text">
+                    こんなお悩みありませんか？
+                </h2>
+                
+                <ul class="fadeUp">
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="problem-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        <span class="japanese-text">売上は伸びているが、管理体制が追いついていない</span>
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="problem-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        <span class="japanese-text">CFOやCAOを採用したいが、コストと人材確保が課題</span>
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="problem-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        <span class="japanese-text">資金調達やIPO準備に何から手をつければ良いか分からない</span>
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="problem-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        <span class="japanese-text">財務・経理・法務の専門知識を持つ人材が社内にいない</span>
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="problem-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        <span class="japanese-text">内部統制や管理体制の構築で何をすべきか判断できない</span>
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="problem-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        <span class="japanese-text">事業拡大に伴う管理業務で本業に集中できない時間が増えた</span>
+                    </li>
+                </ul>
+                
+                <img class="fadeUp" src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=600&fit=crop&q=80" alt="悩んでいる経営者" style="display: block; margin: 0 auto; max-width: 500px; width: 100%; border-radius: 15px;">
+            </div>
+        </article>
+        <!-- Problem Section End -->
+
+        <!-- About Section Start -->
+        <section id="about" class="about-bg section-box">
+            <h2 class="h2-title about-h2-title japanese-text">
+                <span class="fadeUp about-h2-normal">GrowthBridgeなら、</span>
+                <span class="pink-slide">起業からIPOまでの</span><br>
+                <span class="about-h2-pink fadeIn">全て</span>
+                <span class="pink-slide">を任せられます！！</span>
+            </h2>
+            
+            <div class="about-article-items wrapper">
+                <article class="about-article-box fadeUp">
+                    <div class="about-article-flex">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop&q=80" alt="管理業務から解放">
+                        <div class="about-article-txt">
+                            <h3 class="japanese-text">管理業務を任せて、本業に集中できる</h3>
+                            <p class="japanese-text">
+                                財務・経理・法務などのバックオフィス業務を一括でお任せいただけます。
+                                経営者様は商品開発や営業などのコア事業に専念していただけます。
+                                社外CFO・CAO機能として、戦略的な意思決定もサポートいたします。
+                            </p>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="about-article-box fadeUp">
+                    <div class="about-article-flex">
+                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&h=400&fit=crop&q=80" alt="専門家による支援">
+                        <div class="about-article-txt">
+                            <h3 class="japanese-text">CFO・CAO採用不要、外部幹部機能を補完</h3>
+                            <p class="japanese-text">
+                                高額な幹部採用コストをかけずに、経験豊富な専門家の知見を活用できます。
+                                必要な時に、必要な分だけ支援を受けられる柔軟性も強みです。
+                                IPO経験者が実際の経験に基づいてアドバイスいたします。
+                            </p>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="about-article-box fadeUp">
+                    <div class="about-article-flex">
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop&q=80" alt="IPOまでの一貫支援">
+                        <div class="about-article-txt">
+                            <h3 class="japanese-text">IPOまで実行力あるプロジェクトマネジメント</h3>
+                            <p class="japanese-text">
+                                起業フェーズから上場準備まで、各段階に最適な支援を提供します。
+                                売上拡大・資金調達・内部統制すべてに対応し、
+                                実務経験に基づいた「実行型」の支援スタイルでIPO成功までサポートします。
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <!-- About Section End -->
+
+        <!-- Contact Box 1 Start -->
+        <section class="contact-box">
+            <div class="contact-box-inner wrapper">
+                <p class="contact-box-catchphrase japanese-text">
+                    「管理業務に時間を取られている...」「IPOに向けて何を準備すべき？」<br>
+                    そんな経営者の\"困った\"を今すぐ解決します。
+                </p>
+                <div class="g-nav-orderBox-title contact-box-subTitle">
+                    ＼まずはお気軽にご相談ください／
+                </div>
+                <h2 class="contact-box-title japanese-text">
+                    経営の悩みはGrowthBridgeへ！！
+                </h2>
+                <div class="contact-box-flex">
+                    <a href="tel:03-1234-5678" class="gradient-link tel-link">
+                        <span class="tel-icon"></span>
+                        03-1234-5678
+                    </a>
+                    <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="gradient-link web-link">
+                        無料相談で最適な伴走プランを知る
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- Contact Box 1 End -->
+
+        <!-- Services Section Start -->
+        <section id="service" class="section-box">
+            <div class="wrapper">
+                <h2 class="h2-title japanese-text">提供サービス</h2>
+                
+                <div class="service-grid article-margin">
+                    <article class="service-box opacityIn">
+                        <img src="https://images.unsplash.com/photo-1554224155-1696413565d3?w=400&h=250&fit=crop&q=80" alt="財務・経理代行">
+                        <p class="japanese-text">財務・経理代行<br>（月次・年次決算）</p>
+                    </article>
+                    
+                    <article class="service-box opacityIn">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=250&fit=crop&q=80" alt="資金調達サポート">
+                        <p class="japanese-text">資金調達サポート<br>（VC・銀行折衝）</p>
+                    </article>
+                    
+                    <article class="service-box opacityIn">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=250&fit=crop&q=80" alt="IPO準備支援">
+                        <p class="japanese-text">IPO準備支援<br>（内部統制構築）</p>
+                    </article>
+                    
+                    <article class="service-box opacityIn">
+                        <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=400&h=250&fit=crop&q=80" alt="社外CFO機能">
+                        <p class="japanese-text">社外CFO機能<br>（戦略的意思決定支援）</p>
+                    </article>
+                    
+                    <article class="service-box opacityIn">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=250&fit=crop&q=80" alt="管理体制構築">
+                        <p class="japanese-text">管理体制構築<br>（業務プロセス整備）</p>
+                    </article>
+                    
+                    <article class="service-box opacityIn">
+                        <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=400&h=250&fit=crop&q=80" alt="人材育成支援">
+                        <p class="japanese-text">人材育成支援<br>（管理部門強化）</p>
+                    </article>
+                </div>
+                
+                <div class="service-catchphrase border-line fadeUp japanese-text">
+                    上記以外の経営課題も柔軟に対応します！お気軽にご相談ください！
+                </div>
+            </div>
+        </section>
+        <!-- Services Section End -->
+
+        <!-- Reasons Section Start -->
+        <section id="reason" class="reason-bg section-box">
+            <div class="wrapper">
+                <h2 class="h2-title japanese-text">GrowthBridgeが選ばれる理由</h2>
+                
+                <div class="reason-grid article-margin">
+                    <article class="reason-article-box fadeUp">
+                        <div class="number">01</div>
+                        <img src="https://images.unsplash.com/photo-1520607162502-ac4bdfa68f03?w=500&h=250&fit=crop&q=80" alt="スタートアップ特化">
+                        <div class="reason-sentence">
+                            <h3 class="japanese-text">スタートアップ特化だからこそ、深い課題解決ができます</h3>
+                            <p class="japanese-text">
+                                起業からIPOまでのフェーズごとの課題を熟知した専門家が対応します。
+                                <span>一般的なコンサルでは対応できない、成長企業特有の悩みを先回りして解決</span>し、
+                                経営者が本当に必要とするサポートを提供します。
+                            </p>
+                        </div>
+                    </article>
+                    
+                    <article class="reason-article-box fadeUp">
+                        <div class="number">02</div>
+                        <img src="https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?w=500&h=250&fit=crop&q=80" alt="実行型支援">
+                        <div class="reason-sentence">
+                            <h3 class="japanese-text">実行型支援で経営者の負担を大幅軽減</h3>
+                            <p class="japanese-text">
+                                単なるアドバイスではなく、実際の業務を代行・実行することで経営者の工数を削減。
+                                <span>戦略立案から実務実行まで一貫してサポート</span>し、
+                                経営者は売上拡大や事業開発に専念していただけます。
+                            </p>
+                        </div>
+                    </article>
+                    
+                    <article class="reason-article-box fadeUp">
+                        <div class="number">03</div>
+                        <img src="https://images.unsplash.com/photo-1573497491208-6b1acb260507?w=500&h=250&fit=crop&q=80" alt="IPO経験者">
+                        <div class="reason-sentence">
+                            <h3 class="japanese-text">実際のIPO経験者による実践的サポート</h3>
+                            <p class="japanese-text">
+                                理論だけでなく、実際に上場を経験したメンバーが具体的な課題と解決策を熟知。
+                                <span>「何をいつまでに準備すべきか」を明確にお示し</span>し、
+                                効率的にIPOに向けた準備を進めることができます。
+                            </p>
+                        </div>
+                    </article>
+                    
+                    <article class="reason-article-box fadeUp">
+                        <div class="number">04</div>
+                        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=500&h=250&fit=crop&q=80" alt="柔軟なサポート">
+                        <div class="reason-sentence">
+                            <h3 class="japanese-text">必要な時に必要な分だけの柔軟なサポート体制</h3>
+                            <p class="japanese-text">
+                                フルタイム採用は不要。企業の成長フェーズや課題に応じてサポート内容を調整。
+                                <span>スポット相談から継続支援まで、最適なプランを提案</span>し、
+                                コスト効率よく専門知識を活用していただけます。
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <!-- Reasons Section End -->
+
+        <!-- Contact Box 2 Start -->
+        <section class="contact-box">
+            <div class="contact-box-inner wrapper">
+                <p class="contact-box-catchphrase japanese-text">
+                    「IPO準備って何から始めれば？」「財務体制をプロに任せたい」<br>
+                    経営の専門的な課題を、今すぐ相談してみませんか？
+                </p>
+                <div class="g-nav-orderBox-title contact-box-subTitle">
+                    ＼無料相談で現状分析から始めましょう／
+                </div>
+                <h2 class="contact-box-title japanese-text">
+                    成長の壁を一緒に越えましょう！
+                </h2>
+                <div class="contact-box-flex">
+                    <a href="tel:03-1234-5678" class="gradient-link tel-link">
+                        <span class="tel-icon"></span>
+                        03-1234-5678
+                    </a>
+                    <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="gradient-link web-link">
+                        無料相談で最適な伴走プランを知る
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- Contact Box 2 End -->
+
+        <!-- Usage Section Start -->
+        <section id="use" class="section-box">
+            <div class="wrapper">
+                <h2 class="h2-title japanese-text">ご利用の流れ</h2>
+                
+                <div class="use-grid article-margin">
+                    <article class="use-article opacityIn">
+                        <div class="step-number">STEP<span>01</span></div>
+                        <div>
+                            <h3 class="use-title japanese-text">お問い合わせ・現状ヒアリング</h3>
+                            <div class="use-box">
+                                <div class="use-image-box">
+                                    <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?w=400&h=250&fit=crop&q=80" alt="お問い合わせ">
+                                </div>
+                                <p class="japanese-text">
+                                    お電話またはフォームからご連絡ください。担当者が企業の成長フェーズや現在の課題、
+                                    目指したい方向性を詳しくヒアリング。初回相談は無料でお受けしています。
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <article class="use-article opacityIn">
+                        <div class="step-number">STEP<span>02</span></div>
+                        <div>
+                            <h3 class="use-title japanese-text">現状分析・課題整理</h3>
+                            <div class="use-box">
+                                <div class="use-image-box">
+                                    <img src="https://images.unsplash.com/photo-1549923746-c502d488b3ea?w=400&h=250&fit=crop&q=80" alt="現状分析">
+                                </div>
+                                <p class="japanese-text">
+                                    財務状況、組織体制、業務フローなど多角的に現状を分析。
+                                    IPOまでの道筋で解決すべき課題を整理し、優先順位をつけてご提示します。
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <article class="use-article opacityIn">
+                        <div class="step-number">STEP<span>03</span></div>
+                        <div>
+                            <h3 class="use-title japanese-text">最適なサポートプランのご提案</h3>
+                            <div class="use-box">
+                                <div class="use-image-box">
+                                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=250&fit=crop&q=80" alt="プラン提案">
+                                </div>
+                                <p class="japanese-text">
+                                    分析結果に基づき、企業の成長段階と課題に最適なサポートプランをご提案。
+                                    料金体系も明確にお示しし、ご納得いただけるまでご説明いたします。
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <article class="use-article opacityIn">
+                        <div class="step-number">STEP<span>04</span></div>
+                        <div>
+                            <h3 class="use-title japanese-text">ご契約・支援開始</h3>
+                            <div class="use-box">
+                                <div class="use-image-box">
+                                    <img src="https://images.unsplash.com/photo-1556155092-490a1ba16284?w=400&h=250&fit=crop&q=80" alt="サポート開始">
+                                </div>
+                                <p class="japanese-text">
+                                    プランにご納得いただけましたらご契約。専属チームを編成し、
+                                    迅速にサポートを開始。必要に応じて社外CFO・CAOとして経営陣に参画します。
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <article class="use-article opacityIn">
+                        <div class="step-number">STEP<span>05</span></div>
+                        <div>
+                            <h3 class="use-title japanese-text">継続的なモニタリングと改善提案</h3>
+                            <div class="use-box">
+                                <div class="use-image-box">
+                                    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=250&fit=crop&q=80" alt="継続サポート">
+                                </div>
+                                <p class="japanese-text">
+                                    月次レポートでの進捗共有や定期的な戦略会議を通じて、
+                                    企業の成長に合わせた継続的な改善提案とサポート強化を行います。
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <!-- Usage Section End -->
+
+        <!-- Testimonials Section Start -->
+        <section id="voice" class="section-box">
+            <div class="wrapper">
+                <h2 class="h2-title japanese-text">お客様の声</h2>
+                
+                <div class="reason-grid article-margin">
+                    <article class="reason-article-box fadeUp">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&q=80&facepad=2&crop=faces" alt="A社代表" style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 20px; object-fit: cover;">
+                        <h3 class="japanese-text">A社 代表取締役（東京・SaaS事業）</h3>
+                        <p class="japanese-text">
+                            「シリーズAの調達後、急速に事業が拡大しましたが、バックオフィス体制が全く追いついていませんでした。
+                            GrowthBridgeさんに相談してからは、財務体制が整い、月次決算も迅速に。
+                            <span>おかげで商品開発に集中でき、売上も前年比300%成長を実現</span>できました。」
+                        </p>
+                    </article>
+                    
+                    <article class="reason-article-box fadeUp">
+                        <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=150&h=150&fit=crop&q=80&facepad=2&crop=faces" alt="B社CFO" style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 20px; object-fit: cover;">
+                        <h3 class="japanese-text">B社 CFO（神奈川・製造業）</h3>
+                        <p class="japanese-text">
+                            「IPO準備を本格化させる段階でGrowthBridgeさんにサポートを依頼。
+                            内部統制の構築から監査法人との折衝まで、実務経験に基づいた具体的なアドバイスが素晴らしい。
+                            <span>「何をいつまでに」が明確になり、準備が格段にスムーズに</span>進んでいます。」
+                        </p>
+                    </article>
+                    
+                    <article class="reason-article-box fadeUp">
+                        <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=150&h=150&fit=crop&q=80&facepad=2&crop=faces" alt="C社代表" style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 20px; object-fit: cover;">
+                        <h3 class="japanese-text">C社 代表取締役（大阪・EdTech）</h3>
+                        <p class="japanese-text">
+                            「創業から3年、ずっと経理や財務は後回しでした。資金調達を検討し始めた時に、
+                            まずは管理体制を整える必要があると痛感。GrowthBridgeさんのおかげで、
+                            <span>投資家に説明できるレベルの財務体制を短期間で構築</span>でき、無事にシリーズAを調達できました。」
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <!-- Testimonials Section End -->
+
+        <!-- Contact Box 3 Start -->
+        <section class="contact-box">
+            <div class="contact-box-inner wrapper">
+                <p class="contact-box-catchphrase japanese-text">
+                    「うちの会社も成長させたい」「専門家のサポートを受けてみたい」<br>
+                    そんな想いをお持ちでしたら、まずは気軽にご相談ください。
+                </p>
+                <div class="g-nav-orderBox-title contact-box-subTitle">
+                    ＼あなたの会社の成長を一緒に実現しましょう／
+                </div>
+                <h2 class="contact-box-title japanese-text">
+                    IPOへの第一歩を踏み出しませんか？
+                </h2>
+                <div class="contact-box-flex">
+                    <a href="tel:03-1234-5678" class="gradient-link tel-link">
+                        <span class="tel-icon"></span>
+                        03-1234-5678
+                    </a>
+                    <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="gradient-link web-link">
+                        無料相談で最適な伴走プランを知る
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- Contact Box 3 End -->
+
+        <!-- Order Form Section Start -->
+        <section id="order-form" class="section-box">
+            <div class="wrapper">
+                <h2 class="h2-title japanese-text">お問い合わせフォーム</h2>
+                
+                <div class="tab-switch article-margin">
+                    <input class="form-tab" type="radio" name="TAB" id="request-tab" checked>
+                    <label for="request-tab">ご相談フォーム</label>
+                    
+                    <input class="form-tab" type="radio" name="TAB" id="consultation-tab">
+                    <label for="consultation-tab">資料請求フォーム</label>
+                    
+                
+                    
+                    <!-- Request Form -->
+                    <div class="order-form-box">
+                        <form method="post" action="">
+                            <input type="hidden" name="_token" value="ReKAybUrG3lAVn3WnAnV04vaMeRp180WBoBT6U3T" autocomplete="off">
+                            
+                            <label class="label-title" for="company-name">
+                                会社名<span class="required-span">必須</span>
+                            </label>
+                            <input type="text" id="company-name" name="company-name" required>
+                            
+                            <label class="label-title" for="your-name">
+                                ご担当者様氏名<span class="required-span">必須</span>
+                            </label>
+                            <input type="text" id="your-name" name="your-name" autocomplete="name" required>
+                            
+                            <label class="label-title" for="tel">
+                                お電話番号<span class="required-span">必須</span>
+                            </label>
+                            <input type="tel" id="tel" name="tel" inputmode="tel" autocomplete="tel" pattern="0[1-9]{3}[0-9]{6}|0[1-9]0[0-9]{8}" required>
+                            
+                            <label class="label-title" for="email">
+                                メールアドレス<span class="required-span">必須</span>
+                            </label>
+                            <input type="email" id="email" name="email" autocomplete="email" inputmode="email" required>
+                            
+                            <label class="label-title" for="service-select">
+                                ご相談内容<span class="required-span">必須</span>
+                            </label>
+                            <select id="service-select" name="service-select" required>
+                                <option value="" disabled selected>ご相談内容を選択してください</option>
+                                <option value="ipo-support">IPO準備支援</option>
+                                <option value="cfo-service">社外CFO機能</option>
+                                <option value="fundraising">資金調達サポート</option>
+                                <option value="financial-management">財務・経理代行</option>
+                                <option value="management-system">管理体制構築</option>
+                                <option value="other">その他</option>
+                            </select>
+                            
+                            <label class="label-title" for="budget">
+                                ご予算感<span class="any-span">任意</span>
+                            </label>
+                            <select id="budget" name="budget">
+                                <option value="">選択してください</option>
+                                <option value="under-10">月額10万円未満</option>
+                                <option value="10-30">月額10-30万円</option>
+                                <option value="30-50">月額30-50万円</option>
+                                <option value="50-100">月額50-100万円</option>
+                                <option value="over-100">月額100万円以上</option>
+                            </select>
+                            
+                            <label class="label-title" for="comment">
+                                ご相談内容詳細<span class="any-span">任意</span>
+                            </label>
+                            <textarea id="comment-text" name="comment" placeholder="現在の課題や目標、ご相談したい内容などお気軽にご記入ください。"></textarea>
+                            
+                            <div class="attention">
+                                ※内容確認後、担当者より24時間以内にご連絡差し上げます。
+                            </div>
+                            
+                            <div class="submit-button">
+                                <button type="submit">送信する</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Consultation Form -->
+                    <div class="order-form-box">
+                        <form method="post" action="">
+                            <input type="hidden" name="_token" value="ReKAybUrG3lAVn3WnAnV04vaMeRp180WBoBT6U3T" autocomplete="off">
+                            
+                            <label class="label-title" for="company-name-contact">
+                                会社名<span class="required-span">必須</span>
+                            </label>
+                            <input type="text" id="company-name-contact" name="company-name" required>
+                            
+                            <label class="label-title" for="your-name-contact">
+                                ご担当者様氏名<span class="required-span">必須</span>
+                            </label>
+                            <input type="text" id="your-name-contact" name="your-name" required>
+                            
+                            <label class="label-title" for="tel-contact">
+                                お電話番号<span class="required-span">必須</span>
+                            </label>
+                            <input type="tel" id="tel-contact" name="tel" inputmode="tel" autocomplete="tel" pattern="0[1-9]{3}[0-9]{6}|0[1-9]0[0-9]{8}" required>
+                            
+                            <label class="label-title" for="email-contact">
+                                メールアドレス<span class="required-span">必須</span>
+                            </label>
+                            <input type="email" id="email-contact" name="email" autocomplete="email" inputmode="email" required>
+                            
+                            <label class="label-title" for="material-type">
+                                ご希望資料<span class="required-span">必須</span>
+                            </label>
+                            <select id="material-type" name="material-type" required>
+                                <option value="" disabled selected>ご希望の資料を選択してください</option>
+                                <option value="service-overview">サービス概要資料</option>
+                                <option value="case-study">導入事例集</option>
+                                <option value="ipo-preparation">IPO準備ガイド</option>
+                                <option value="price-plan">料金プラン詳細</option>
+                                <option value="all">全ての資料</option>
+                            </select>
+                            
+                            <label class="label-title" for="comment-contact">
+                                その他ご要望<span class="any-span">任意</span>
+                            </label>
+                            <textarea id="comment-text-contact" name="comment" placeholder="資料に関するご質問やその他ご要望がございましたらお気軽にご記入ください。"></textarea>
+                            
+                            <div class="attention">
+                                ※資料は即座にメールでお送りいたします。
+                            </div>
+                            
+                            <div class="submit-button">
+                                <button type="submit">資料を請求する</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Order Form Section End -->
+    </main>
+
+    <!-- Footer Start -->
+    <footer id="footer" class="order-box-view">
+        <section class="footer-flex section-box wrapper">
+            <div>
+                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=200&h=80&fit=crop&q=80" alt="GrowthBridge" style="max-width: 200px; height: auto;">
+            </div>
+            
+            <table class="footer-info">
+                <tbody>
+                    <tr>
+                        <th>運営会社</th>
+                        <td>株式会社GrowthBridge</td>
+                    </tr>
+                    <tr>
+                        <th>代表取締役</th>
+                        <td>成長 太郎</td>
+                    </tr>
+                    <tr>
+                        <th>住所</th>
+                        <td>〒100-0005 東京都千代田区丸の内1-1-1</td>
+                    </tr>
+                    <tr>
+                        <th>電話番号</th>
+                        <td>
+                            <a href="tel:03-1234-5678" class="footer-tel-link">03-1234-5678</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <div class="footer-bottom">
+            ©2025 GrowthBridge - 起業からIPOまでの伴走型経営支援
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+    <!-- Sticky CTA -->
+    <div class="sticky-cta" id="sticky-cta">
+        <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="cta-button japanese-text">
+            無料相談で最適な伴走プランを知る
+        </a>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.fadeUp, .fadeIn, .opacityIn').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const gNav = document.getElementById('g-nav');
+
+        hamburgerMenu.addEventListener('click', () => {
+            gNav.classList.toggle('open');
+        });
+
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('#g-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                gNav.classList.remove('open');
+            });
+        });
+
+        // Sticky CTA visibility
+        const stickyCta = document.getElementById('sticky-cta');
+        const heroSection = document.getElementById('key-visual');
+
+        const stickyObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    stickyCta.classList.add('show');
+                } else {
+                    stickyCta.classList.remove('show');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        stickyObserver.observe(heroSection);
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = 100;
+                    const targetPosition = target.offsetTop - headerHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Form tab switching
+        document.querySelectorAll('.form-tab').forEach(tab => {
+            tab.addEventListener('change', function() {
+                // Hide all form boxes
+                document.querySelectorAll('.order-form-box').forEach(box => {
+                    box.style.display = 'none';
+                });
+                
+                // Show the selected form box
+                if (this.checked) {
+                    const formBox = this.nextElementSibling.nextElementSibling;
+                    if (formBox && formBox.classList.contains('order-form-box')) {
+                        formBox.style.display = 'block';
+                    }
+                }
+            });
+        });
+
+        // Initialize first tab as active
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstTab = document.querySelector('.form-tab[checked]');
+            if (firstTab) {
+                firstTab.dispatchEvent(new Event('change'));
+            }
+        });
+
+        // Form validation and submission
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simple form validation
+                const requiredFields = this.querySelectorAll('[required]');
+                let isValid = true;
+                
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.style.borderColor = '#ef4444';
+                    } else {
+                        field.style.borderColor = '#e5e7eb';
+                    }
+                });
+                
+                if (isValid) {
+                    // Show success message
+                    const successMsg = document.createElement('div');
+                    successMsg.innerHTML = 'お問い合わせありがとうございます。担当者より24時間以内にご連絡いたします。';
+                    successMsg.style.cssText = `
+                        position: fixed;
+                        top: 100px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        background: #10b981;
+                        color: white;
+                        padding: 15px 30px;
+                        border-radius: 5px;
+                        z-index: 10000;
+                        font-size: 16px;
+                        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                        animation: fadeInOut 5s forwards;
+                    `;
+                    document.body.appendChild(successMsg);
+                    
+                    // Reset form
+                    this.reset();
+                    
+                    // Remove success message after 5 seconds
+                    setTimeout(() => {
+                        successMsg.remove();
+                    }, 5000);
+                } else {
+                    // Show error message
+                    const errorMsg = document.createElement('div');
+                    errorMsg.innerHTML = '必須項目をすべて入力してください。';
+                    errorMsg.style.cssText = `
+                        position: fixed;
+                        top: 100px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        background: #ef4444;
+                        color: white;
+                        padding: 15px 30px;
+                        border-radius: 5px;
+                        z-index: 10000;
+                        font-size: 16px;
+                        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                        animation: fadeInOut 3s forwards;
+                    `;
+                    document.body.appendChild(errorMsg);
+                    
+                    // Remove error message after 3 seconds
+                    setTimeout(() => {
+                        errorMsg.remove();
+                    }, 3000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
