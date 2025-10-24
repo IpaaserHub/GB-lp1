@@ -616,6 +616,107 @@
             opacity: 0.9;
         }
 
+        /* Decorative Elements */
+        .decorative-shape {
+            position: absolute;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .shape-circle {
+            width: 100px;
+            height: 100px;
+            border: 3px solid var(--accent-gold);
+            border-radius: 50%;
+            animation: float-rotate 15s ease-in-out infinite;
+        }
+
+        .shape-square {
+            width: 80px;
+            height: 80px;
+            border: 3px solid var(--main-theme-color);
+            transform: rotate(45deg);
+            animation: float-rotate 20s ease-in-out infinite reverse;
+        }
+
+        .shape-triangle {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 90px solid var(--accent-gold);
+            opacity: 0.3;
+            animation: float 18s ease-in-out infinite;
+        }
+
+        @keyframes float-rotate {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(180deg);
+            }
+        }
+
+        /* Section Divider Waves */
+        .wave-divider {
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .wave-divider svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 80px;
+        }
+
+        .wave-divider-top {
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+
+        .wave-divider-top svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 80px;
+        }
+
+        /* Enhanced Icons */
+        .icon-wrapper {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #d4af37 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 25px rgba(197, 157, 95, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .icon-wrapper:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 35px rgba(197, 157, 95, 0.5);
+        }
+
+        .icon-wrapper svg {
+            width: 32px;
+            height: 32px;
+            color: var(--main-theme-color-dark);
+        }
+
         /* Services Grid */
         .service-grid {
             display: grid;
@@ -1329,6 +1430,10 @@
 
         <!-- Problem Section Start -->
         <article id="problem" class="problem-bg section-box">
+            <!-- Decorative Shapes -->
+            <div class="decorative-shape shape-circle" style="top: 10%; right: 5%;"></div>
+            <div class="decorative-shape shape-square" style="bottom: 15%; left: 8%;"></div>
+
             <div class="wrapper problem-box">
                 <h2 class="h2-title problem-h2 border-line fadeUp japanese-text">
                     こんなお悩みありませんか？
@@ -1418,11 +1523,20 @@
                     </div>
                 </article>
             </div>
+            <!-- Wave Divider -->
+            <div class="wave-divider">
+                <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#ffffff"></path>
+                </svg>
+            </div>
         </section>
         <!-- About Section End -->
 
         <!-- Stats Section Start -->
         <section class="stats-section">
+            <!-- Decorative Shapes -->
+            <div class="decorative-shape shape-triangle" style="top: 20%; left: 10%;"></div>
+            <div class="decorative-shape shape-circle" style="bottom: 25%; right: 12%;"></div>
             <div class="wrapper">
                 <div class="stats-grid">
                     <div class="stat-box fadeUp">
@@ -1479,32 +1593,44 @@
                 
                 <div class="service-grid article-margin">
                     <article class="service-box opacityIn">
-                        <img src="https://images.unsplash.com/photo-1554224155-1696413565d3?w=400&h=250&fit=crop&q=80" alt="財務・経理代行">
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        </div>
                         <p class="japanese-text">財務・経理代行<br>（月次・年次決算）</p>
                     </article>
-                    
+
                     <article class="service-box opacityIn">
-                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=250&fit=crop&q=80" alt="資金調達サポート">
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                        </div>
                         <p class="japanese-text">資金調達サポート<br>（VC・銀行折衝）</p>
                     </article>
-                    
+
                     <article class="service-box opacityIn">
-                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=250&fit=crop&q=80" alt="IPO準備支援">
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                        </div>
                         <p class="japanese-text">IPO準備支援<br>（内部統制構築）</p>
                     </article>
                     
                     <article class="service-box opacityIn">
-                        <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=400&h=250&fit=crop&q=80" alt="社外CFO機能">
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        </div>
                         <p class="japanese-text">社外CFO機能<br>（戦略的意思決定支援）</p>
                     </article>
-                    
+
                     <article class="service-box opacityIn">
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=250&fit=crop&q=80" alt="管理体制構築">
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path></svg>
+                        </div>
                         <p class="japanese-text">管理体制構築<br>（業務プロセス整備）</p>
                     </article>
-                    
+
                     <article class="service-box opacityIn">
-                        <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=400&h=250&fit=crop&q=80" alt="人材育成支援">
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                        </div>
                         <p class="japanese-text">人材育成支援<br>（管理部門強化）</p>
                     </article>
                 </div>
@@ -1518,6 +1644,13 @@
 
         <!-- Reasons Section Start -->
         <section id="reason" class="reason-bg section-box">
+            <!-- Wave Divider Top -->
+            <div class="wave-divider-top">
+                <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#f1f5f9"></path>
+                </svg>
+            </div>
+
             <div class="wrapper">
                 <h2 class="h2-title japanese-text">GrowthBridgeが選ばれる理由</h2>
                 
