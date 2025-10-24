@@ -2464,32 +2464,80 @@
         });
 
         // ========================================
-        // 3. Typewriter Effect (タイプライター効果)
+        // 3. Typewriter Effect (タイプライター効果) - Enhanced
         // ========================================
-        function typeWriter(element, text, speed = 50) {
-            let i = 0;
-            element.textContent = '';
-            element.style.opacity = '1';
+        function typeWriter(element, text, speed = 50, delay = 0) {
+            setTimeout(() => {
+                let i = 0;
+                element.textContent = '';
+                element.style.opacity = '1';
 
-            function type() {
-                if (i < text.length) {
-                    element.textContent += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
+                function type() {
+                    if (i < text.length) {
+                        element.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(type, speed);
+                    }
                 }
-            }
-            type();
+                type();
+            }, delay);
         }
 
-        // Apply typewriter to hero title
+        // Apply typewriter to all hero texts
         window.addEventListener('load', () => {
-            const heroTitle = document.querySelector('.key-title-inner span');
-            if (heroTitle) {
-                const originalText = heroTitle.textContent;
-                heroTitle.style.opacity = '0';
-                setTimeout(() => {
-                    typeWriter(heroTitle, originalText, 80);
-                }, 500);
+            // サブテキスト
+            const subText = document.querySelector('.key-sub-txt');
+            if (subText) {
+                const originalText = subText.textContent;
+                subText.style.opacity = '0';
+                typeWriter(subText, originalText, 40, 300);
+            }
+
+            // 1行目: 社長の仕事は、未来を描くこと。
+            const firstLine = document.querySelector('.key-title-inner.key-title-inner-scroll');
+            if (firstLine) {
+                const originalText = firstLine.textContent.trim();
+                firstLine.style.opacity = '0';
+                typeWriter(firstLine, originalText, 60, 800);
+            }
+
+            // 2行目の前半: IPOまでの地図は、
+            const secondLine = document.querySelector('.key-title-inner:not(.key-title-inner-scroll)');
+            if (secondLine) {
+                const fullText = secondLine.textContent.trim();
+                const span = secondLine.querySelector('span');
+
+                if (span) {
+                    const spanText = span.textContent.trim();
+                    const beforeSpan = fullText.split(spanText)[0].trim();
+
+                    // spanの前のテキスト部分を作成
+                    const textNode = document.createTextNode('');
+                    secondLine.insertBefore(textNode, span);
+
+                    // 全体を非表示
+                    secondLine.style.opacity = '0';
+                    span.style.opacity = '0';
+
+                    // 2行目前半のタイプライター
+                    setTimeout(() => {
+                        secondLine.style.opacity = '1';
+                        let i = 0;
+                        function typeBeforeSpan() {
+                            if (i < beforeSpan.length) {
+                                textNode.textContent += beforeSpan.charAt(i);
+                                i++;
+                                setTimeout(typeBeforeSpan, 60);
+                            } else {
+                                // 前半が終わったらspanのタイプライター開始
+                                setTimeout(() => {
+                                    typeWriter(span, spanText, 80, 0);
+                                }, 200);
+                            }
+                        }
+                        typeBeforeSpan();
+                    }, 2500);
+                }
             }
         });
 
