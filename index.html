@@ -1611,7 +1611,7 @@
                             社長の仕事は、未来を描くこと。
                         </div>
                         <div class="key-title-inner">
-                            IPOまでの地図は、<span class="gradient-text">私たちが描きます。</span>
+                            <span class="key-title-before"></span><span class="gradient-text">私たちが描きます。</span>
                         </div>
                     </h2>
                 </div>
@@ -2549,37 +2549,35 @@
                 typeWriter(firstLine, originalText, 60, 800);
             }
 
-            // 2行目の前半: IPOまでの地図は、
+            // 2行目: IPOまでの地図は、 + 私たちが描きます。
             const secondLine = document.querySelector('.key-title-inner:not(.key-title-inner-scroll)');
             if (secondLine) {
-                const fullText = secondLine.textContent.trim();
-                const span = secondLine.querySelector('span');
+                const beforeSpan = secondLine.querySelector('.key-title-before');
+                const gradientSpan = secondLine.querySelector('.gradient-text');
 
-                if (span) {
-                    const spanText = span.textContent.trim();
-                    const beforeSpan = fullText.split(spanText)[0].trim();
-
-                    // spanの前のテキスト部分を作成
-                    const textNode = document.createTextNode('');
-                    secondLine.insertBefore(textNode, span);
+                if (beforeSpan && gradientSpan) {
+                    const beforeText = 'IPOまでの地図は、';
+                    const gradientText = gradientSpan.textContent.trim();
 
                     // 全体を非表示
                     secondLine.style.opacity = '0';
-                    span.style.opacity = '0';
+                    beforeSpan.style.opacity = '0';
+                    gradientSpan.style.opacity = '0';
 
                     // 2行目前半のタイプライター
                     setTimeout(() => {
                         secondLine.style.opacity = '1';
+                        beforeSpan.style.opacity = '1';
                         let i = 0;
                         function typeBeforeSpan() {
-                            if (i < beforeSpan.length) {
-                                textNode.textContent += beforeSpan.charAt(i);
+                            if (i < beforeText.length) {
+                                beforeSpan.textContent += beforeText.charAt(i);
                                 i++;
                                 setTimeout(typeBeforeSpan, 60);
                             } else {
                                 // 前半が終わったらspanのタイプライター開始
                                 setTimeout(() => {
-                                    typeWriter(span, spanText, 80, 0);
+                                    typeWriter(gradientSpan, gradientText, 80, 0);
                                 }, 200);
                             }
                         }
