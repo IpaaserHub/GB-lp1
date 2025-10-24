@@ -875,6 +875,54 @@
             display: inline-block;
         }
 
+        /* Interactive Elements */
+
+        /* Cursor Follow Light Effect */
+        .cursor-light {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(197, 157, 95, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        /* Ripple Effect */
+        .ripple-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* 3D Tilt Effect */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease;
+        }
+
+        .tilt-card:hover {
+            transform: perspective(1000px);
+        }
+
         /* Services Grid */
         .service-grid {
             display: grid;
@@ -2560,6 +2608,88 @@
             el.style.transform = 'translateY(30px) scale(0.95)';
             el.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
             enhancedObserver.observe(el);
+        });
+
+        // ========================================
+        // 5. Interactive Elements (インタラクティブ要素)
+        // ========================================
+
+        // Cursor Follow Light Effect
+        const cursorLight = document.createElement('div');
+        cursorLight.className = 'cursor-light';
+        document.body.appendChild(cursorLight);
+
+        let mouseX = 0, mouseY = 0;
+        let lightX = 0, lightY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorLight.style.opacity = '1';
+        });
+
+        document.addEventListener('mouseleave', () => {
+            cursorLight.style.opacity = '0';
+        });
+
+        // Smooth follow animation
+        function animateCursorLight() {
+            lightX += (mouseX - lightX) * 0.1;
+            lightY += (mouseY - lightY) * 0.1;
+            cursorLight.style.left = lightX + 'px';
+            cursorLight.style.top = lightY + 'px';
+            requestAnimationFrame(animateCursorLight);
+        }
+        animateCursorLight();
+
+        // Ripple Effect for Buttons
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const ripple = document.createElement('span');
+            const rect = button.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = event.clientX - rect.left - size / 2;
+            const y = event.clientY - rect.top - size / 2;
+
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+
+            button.appendChild(ripple);
+
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        }
+
+        // Add ripple to all buttons
+        document.querySelectorAll('button, .gradient-link, .key-visual-link').forEach(button => {
+            button.classList.add('ripple-container');
+            button.addEventListener('click', createRipple);
+        });
+
+        // 3D Tilt Effect for Cards
+        document.querySelectorAll('.service-box, .reason-article-box, .stat-box').forEach(card => {
+            card.classList.add('tilt-card');
+
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            });
         });
     </script>
 </body>
